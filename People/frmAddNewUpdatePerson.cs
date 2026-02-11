@@ -158,23 +158,21 @@ namespace People_Management
 
            
         }
-        //private bool IsValidEmail(string email)
-        //{
-        //    try
-        //    {
-        //        var addr = new System.Net.Mail.MailAddress(email);
-        //        return addr.Address == email;
-        //    }
-        //    catch
-        //    {
-        //        return false;
-        //    }
-        //}
+        
         private void txtEmail_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (txtEmail.Text.Trim() == "")
-                return;
-            
+                if (string.IsNullOrEmpty(txtEmail.Text.Trim()))
+                {
+                    e.Cancel = true;
+                    errorProvider1.SetError(txtEmail, "This field is required!");
+                    return;
+                }
+                else
+                {
+                    e.Cancel = false;
+                   errorProvider1.SetError(txtEmail, null);
+                }
+ 
                 if (!clsValidatoin.ValidateEmail(txtEmail.Text))
                 {
                     e.Cancel = true;
@@ -339,37 +337,46 @@ namespace People_Management
         private void txtFirstName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(txtFirstName.Text))
+            {
+              e.Cancel = true;
               errorProvider1.SetError(txtFirstName, "This field is required"); 
+            }
             else
                 errorProvider1.SetError(txtFirstName, null);
         }
         private void txtLastName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(txtLastName.Text))
+            {
+                e.Cancel = true;
                 errorProvider1.SetError(txtLastName, "This field is required");
+            }
             else
                 errorProvider1.SetError(txtLastName, null);
         }
         private void txtSecondName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(txtSecondName.Text))
+            {
+                e.Cancel = true;
                 errorProvider1.SetError(txtSecondName, "This field is required");
+            }
             else
                 errorProvider1.SetError(txtSecondName, null);
         }
         private void txtAddress_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(txtAddress.Text))
+            {
+                e.Cancel = true;
                 errorProvider1.SetError(txtAddress, "This field is required");
+            }
             else
                 errorProvider1.SetError(txtAddress, null);
         }
         private void txtPhone_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //if (string.IsNullOrEmpty(txtPhone.Text))
-            //    errorProvider1.SetError(txtPhone, "This field is required");
-            //else
-            //    errorProvider1.SetError(txtPhone, null);
+      
         }
     }
 }
